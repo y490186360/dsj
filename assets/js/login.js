@@ -39,7 +39,32 @@ $(function () {
             if (res.status !== 0) {
                 return console.log(res.message)
             }
-            console.log(res.message)
+            layer.msg('注册成功，请登录！')
+            // 模拟人的点击行为
+            $('#link_login').click()
         })
+    })
+
+    // 登录功能
+    $('#form_login').on('submit',function(e){
+      e.preventDefault();
+      console.log($(this).serialize());
+      $.ajax({
+        url:'http://ajax.frontend.itheima.net/api/login',
+        method:'POST',
+        //快速获取表单数据
+        data:$(this).serialize(),
+        success:function(res){
+          if (res.status !== 0){
+            return layer.msg('登录失败！')
+          }
+          layer.msg('登陆成功!')
+          //储存
+          console.log(res.token);
+          localStorage.setItem('token',res.token)
+          //跳转到后台主业
+          location.href = '/index.html'
+        }
+      })
     })
 })
