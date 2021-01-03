@@ -1,7 +1,7 @@
 $(function() {
   var form = layui.form
   var layer = layui.layer
-
+  console.log(form);
   form.verify({
     nickname: function(value) {
       if (value.length > 6) {
